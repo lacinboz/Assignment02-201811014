@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ChessClock</string>
+    <string name="start">Start</string>
+    <string name="changeclock1">Change Clock</string>
+    <string name="reset1">Reset</string>
+    <string name="start2">Start</string>
+    <string name="changeclock2">Change Clock</string>
+    <string name="reset2">Reset</string>
+    <string name="time">00:00</string>
+    <string name="setting">Minutes</string>
+    <string name="set">Set</string>
+
+</resources>
