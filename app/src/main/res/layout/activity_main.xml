@@ -103,13 +103,13 @@
             android:textSize="60sp" />
     <ImageView
         android:layout_width="wrap_content"
-        android:src="@drawable/image2"
+        android:src="@drawable/red2"
         android:layout_below="@+id/timer"
-        android:layout_height="110dp"
+        android:layout_height="match_parent"
         android:id="@+id/imageview"
         android:rotation="180"
+        android:layout_marginTop="-30dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
 
 
         />
@@ -169,19 +169,15 @@
             android:textColor="#AE0202"
             android:textStyle="italic"
             android:textSize="60sp" />
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:src="@drawable/image2"
-            android:layout_above="@+id/timer2"
-            android:layout_height="110dp"
             android:id="@+id/imageview2"
-            android:rotation="180"
-            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/timer2"
             android:layout_centerVertical="true"
-
-
-
-            />
+            android:layout_marginBottom="-30dp"
+            android:src="@drawable/red2" />
     </RelativeLayout>
 
 </LinearLayout>

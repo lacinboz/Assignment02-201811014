@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     pauseTimer2();
                 else
                     startTimer2();
+
             }
         });
         changeClock2.setOnClickListener(new View.OnClickListener() {
@@ -122,31 +124,9 @@ public class MainActivity extends AppCompatActivity {
         start_time=start_time2;
         resetTimer();
         resetTimer2();
+        closeKeyboard();
     }
-    private void updateWatchInterface() {
-        if (mTimerRunning) {
-            mInput.setVisibility(View.INVISIBLE);
-            mButtonSet.setVisibility(View.INVISIBLE);
-            mButtonReset.setVisibility(View.INVISIBLE);
-            mButtonStartPause.setText("Pause");
-        } else {
-            mInput.setVisibility(View.VISIBLE);
-            mButtonSet.setVisibility(View.VISIBLE);
-            mButtonStartPause.setText("Start");
 
-            if (lefttime < 1000) {
-                mButtonStartPause.setVisibility(View.INVISIBLE);
-            } else {
-                mButtonStartPause.setVisibility(View.VISIBLE);
-            }
-
-            if (lefttime < start_time) {
-                mButtonReset.setVisibility(View.VISIBLE);
-            } else {
-                mButtonReset.setVisibility(View.INVISIBLE);
-            }
-        }
-    }
 
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(lefttime, 1000) {
@@ -161,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
             mTimerRunning=false;
             mButtonStartPause.setText("Start");
             mButtonStartPause.setVisibility(View.INVISIBLE);
-                mButtonReset.setVisibility(View.VISIBLE);
+            mButtonReset.setVisibility(View.VISIBLE);
+                mInput.setVisibility(View.VISIBLE);
+                mButtonSet.setVisibility(View.VISIBLE);
 
             }
 
@@ -169,7 +151,9 @@ public class MainActivity extends AppCompatActivity {
         }.start();
         mTimerRunning=true;
         mButtonStartPause.setText("Pause");
-        updateWatchInterface();
+        mInput.setVisibility(View.INVISIBLE);
+        mButtonSet.setVisibility(View.INVISIBLE);
+
     }
     private void startTimer2() {
         mCountDownTimer2 = new CountDownTimer(lefttime2, 1000) {
@@ -185,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
                 mTimerRunning2=false;
                 mButtonStartPause2.setText("Start");
                 mButtonStartPause2.setVisibility(View.INVISIBLE);
+                mInput.setVisibility(View.VISIBLE);
+                mButtonSet.setVisibility(View.VISIBLE);
                 mButtonReset2.setVisibility(View.VISIBLE);
 
             }
@@ -194,6 +180,8 @@ public class MainActivity extends AppCompatActivity {
         mTimerRunning2=true;
         mButtonStartPause2.setText("Pause");
         mButtonReset2.setVisibility(View.INVISIBLE);
+        mInput.setVisibility(View.INVISIBLE);
+        mButtonSet.setVisibility(View.INVISIBLE);
     }
     private void pauseTimer(){
     mCountDownTimer.cancel();
@@ -206,6 +194,9 @@ public class MainActivity extends AppCompatActivity {
         updateCountDownText();
         mButtonReset.setVisibility(View.INVISIBLE);
         mButtonStartPause.setVisibility(View.VISIBLE);
+        mInput.setVisibility(View.VISIBLE);
+        mButtonSet.setVisibility(View.VISIBLE);
+        mButtonReset2.setVisibility(View.VISIBLE);
     }
     private void pauseTimer2(){
         mCountDownTimer2.cancel();
@@ -218,6 +209,9 @@ public class MainActivity extends AppCompatActivity {
         updateCountDownText2();
         mButtonReset2.setVisibility(View.INVISIBLE);
         mButtonStartPause2.setVisibility(View.VISIBLE);
+        mInput.setVisibility(View.VISIBLE);
+        mButtonSet.setVisibility(View.VISIBLE);
+        mButtonReset2.setVisibility(View.VISIBLE);
     }
     private void updateCountDownText(){
         int minutes= (int) (lefttime/1000)/60;
@@ -233,5 +227,14 @@ public class MainActivity extends AppCompatActivity {
         mTextViewCountDown2.setText(timeLeft);
 
     }
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+
 
 }
